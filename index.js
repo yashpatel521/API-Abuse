@@ -1,6 +1,12 @@
 const express = require("express");
 var cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
+const conn = require("./config");
+
+conn.connect(function (err) {
+  if (err) throw err;
+  console.log("Database Connected!");
+});
 
 const app = express();
 const PORT = 5000; // port that is use for backend
