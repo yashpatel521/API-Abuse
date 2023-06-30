@@ -5,13 +5,9 @@ const router = express.Router();
 
 router.route("/login").post((req, res) => {
   const { email, password } = req.body;
-  const selectQuery =
-    `SELECT * FROM user WHERE email='` +
-    email +
-    `' AND password='` +
-    password +
-    `'`;
-  console.log(selectQuery);
+
+  const selectQuery = `SELECT * FROM user WHERE email='${email}' AND password='${password}'`;
+
   conn.query(selectQuery, function (err, result, fields) {
     if (err) res.status(400).send(err);
     if (result.length == 0) {

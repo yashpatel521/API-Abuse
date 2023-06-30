@@ -8,17 +8,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body>
-    <form action="">
+    <p>FOR SQL Injection :: <b>' or '1=1</b></p>
+    <form id="loginForm">
       <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" value="yash" /><br />
+      <input type="email" id="email" name="email" value="yash@gmail.com" /><br />
       <label for="password">Password :</label><br />
       <input type="text" id="password" name="password" value="123456" /><br /><br />
       <input type="submit" value="Submit" />
     </form>
+    <span id="message"></span>
   </body>
   <script>
     $(document).ready(function() {
-      console.log("Welcome");
+      $("#loginForm").on("submit", function(e) {
+        e.preventDefault();
+        var email = $("#email").val();
+        var password = $("#password").val();
+
+        $.ajax({
+          url: "http://localhost:5000/api/users/login",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: JSON.stringify({ email, password }),
+          success: function(response, status) {
+            $("#message").text(response.message);
+          },
+          error: function(error) {
+            $("#message").text(error.responseJSON.message);
+          }
+        });
+      });
     });
   </script>
 </html>
