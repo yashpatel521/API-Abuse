@@ -7,6 +7,19 @@
 - Example for SQL Injection
 - Prevention
 
+## JavaScript Library Used for view pages
+
+- JQuery
+- Bootstrap
+- validate Js
+
+## NPM packages used for backend development
+
+- express
+- express-rate-limit
+- mysql
+- cors
+
 ## Installation
 
 ```bash
@@ -31,7 +44,15 @@ $ http://localhost:5000/api/users/login
     Request : {
                 email : '',
                 password : '',
-                }
+              }
+
+#Login API [POST]
+$ http://localhost:5000/api/users/bruteForceLogin
+    Request : {
+                email : '',
+                password : '',
+              }
+ >> This API is wil Limit set to number of requests per seconds
 ```
 
 ## View Pages
@@ -43,16 +64,3 @@ $ http://localhost:5000/views/login.html
 # Secure Login Page
 $ http://localhost:5000/views/securelogin.html
 ```
-
-## JavaScript Library Used for view pages
-
-- JQuery
-- Bootstrap
-- validate Js
-
-## NPM packages used for backend development
-
-- express
-- express-rate-limit
-- mysql
-- cors
