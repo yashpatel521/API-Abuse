@@ -37,6 +37,22 @@ $ http://localhost:5000/api/users/login
 ## View Pages
 
 ```bash
-#Login Page
+# Login Page
 $ http://localhost:5000/views/login.html
+
+# Secure Login Page
+$ http://localhost:5000/views/securelogin.html
 ```
+
+## JavaScript Library Used for view pages
+
+- JQuery
+- Bootstrap
+- validate Js
+
+## NPM packages used for backend development
+
+- express
+- express-rate-limit
+- mysql
+- cors
