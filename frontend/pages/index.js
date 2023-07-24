@@ -11,11 +11,16 @@ export default function Home() {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className={styles.slImgBg}></div>
+      <div
+        className={styles.slImgBg}
+        style={{
+          backgroundImage: 'url("/images/api1.png")',
+        }}
+      ></div>
 
       <div className={`${styles.container} position-absolute text-dark`}>
         <Head>
-          <title>Create Next App</title>
+          <title>API Abuse</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
