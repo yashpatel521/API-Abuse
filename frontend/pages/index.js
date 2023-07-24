@@ -11,8 +11,9 @@ export default function Home() {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <div className={styles.slImgBg}></div>
 
-      <div className={styles.container}>
+      <div className={`${styles.container} position-absolute text-dark`}>
         <Head>
           <title>Create Next App</title>
           <link rel="icon" href="/favicon.ico" />
@@ -36,7 +37,7 @@ export default function Home() {
 
             <Link href="/secureLogin" className={styles.card}>
               <h3>Secure Login Page &rarr;</h3>
-              <p>How to prevent attacks.</p>
+              <p>How to prevent SQL Injection and Brute force attacks.</p>
             </Link>
           </div>
         </main>
