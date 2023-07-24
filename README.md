@@ -4,7 +4,7 @@
 
 - Express JS for APIs and middleware
 - Database use MySQL
-- Example for SQL Injection
+- Example for API Attacks
 - Prevention
 
 ## JavaScript Library Used for view pages
@@ -23,7 +23,7 @@
 ## Installation
 
 ```bash
-$ npm install
+$ npm install OR npm i
 ```
 
 ## Running the app
@@ -31,6 +31,16 @@ $ npm install
 ```bash
 # To start the app on PORT '5000'
 $ npm run start
+```
+
+## View Pages
+
+```bash
+# Login Page
+$ http://localhost:5000/views/login.html
+
+# Secure Login Page
+$ http://localhost:5000/views/securelogin.html
 ```
 
 ## APIs
@@ -52,15 +62,5 @@ $ http://localhost:5000/api/users/bruteForceLogin
                 email : '',
                 password : '',
               }
- >> This API is wil Limit set to number of requests per seconds
-```
-
-## View Pages
-
-```bash
-# Login Page
-$ http://localhost:5000/views/login.html
-
-# Secure Login Page
-$ http://localhost:5000/views/securelogin.html
+ >> This API is with Limit set to number of requests per seconds for '3'.
 ```
