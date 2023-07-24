@@ -25,7 +25,7 @@
         <h1 class="ul">Simple Login API</h1>
         <hr />
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <form id="loginFormOne">
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
@@ -42,7 +42,7 @@
               <div class="col-auto"><input type="submit" class="btn btn-primary mb-3" value="Submit" /></div>
             </form>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-7">
             <h3>Output of API Call</h3>
             <div class="border p-2"><pre id="messageOne"></pre></div>
           </div>
@@ -52,7 +52,7 @@
         <h1 class="ul">SQL Injection Login API</h1>
         <hr />
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <form id="loginFormTwo">
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
@@ -69,7 +69,7 @@
               <div class="col-auto"><input type="submit" class="btn btn-primary mb-3" value="Submit" /></div>
             </form>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-7">
             <h3>Output of API Call</h3>
             <div class="border p-2"><pre id="messageTwo"></pre></div>
           </div>
@@ -79,7 +79,7 @@
         <h1 class="ul">Brute Force Attack Login API</h1>
         <hr />
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <form id="loginFormThree">
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
@@ -105,7 +105,7 @@
               <p id="passwordCount"></p>
             </form>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-7">
             <h3>Output of API Call</h3>
             <div class="border p-2"><pre id="messageThree"></pre></div>
           </div>
@@ -223,10 +223,10 @@
       // Brute Force attack API call for Login
       $("#loginFormThree").on("submit", function(e) {
         e.preventDefault();
-        bruteForceAttack("1", 0);
+        bruteForceAttack(generateNumberStrings());
       });
 
-      function bruteForceAttack(password, counter) {
+      function bruteForceAttack(password, counter = 0) {
         var email = $("#emailThree").val();
         $.ajax({
           url: "http://localhost:5000/api/users/bruteForceLogin",
@@ -236,15 +236,13 @@
           },
           data: JSON.stringify({ email, password }),
           success: function(response, status) {
-            console.log(response);
+            // console.log(response);
             $("#passwordThree").val(password);
-            if (response.status == true || response.status == "true") {
-              $("#messageThree").text(JSON.stringify(response, null, 3));
-            } else {
+            $("#messageThree").text(JSON.stringify(response, null, 3));
+            if (!(response.status == true || response.status == "true")) {
               counter++;
-              password = generateNumberStrings(counter + 1);
+              password = generateNumberStrings();
               setTimeout(() => {
-                $("#messageThree").text(JSON.stringify(response, null, 3));
                 bruteForceAttack(password, counter);
               }, 2000);
             }
@@ -253,10 +251,15 @@
         });
       }
 
+      function getRandomDigit() {
+        return Math.floor(Math.random() * 10); // Generates a random digit between 0 and 9
+      }
+
       function generateNumberStrings(n) {
         let result = "";
-        for (let i = 1; i <= n; i++) {
-          result += i.toString();
+
+        for (let i = 1; i <= 6; i++) {
+          result += getRandomDigit().toString();
         }
         return result;
       }
