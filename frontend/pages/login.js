@@ -1,13 +1,40 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import { useState } from "react";
 
 export default function login() {
+  const [emailOne, setEmailOne] = useState("yash@gmail.com");
+  const [passwordOne, setPasswordOne] = useState("Yash1234$");
+
+  const submitHandlerOne = (e) => {
+    e.preventDefault();
+    if (!emailOne || !passwordOne) return;
+
+    console.log(emailOne + " " + passwordOne);
+  };
+
+  const [emailTwo, setEmailTwo] = useState("yash@gmail.com");
+  const [passwordTwo, setPasswordTwo] = useState("Yash1234$");
+
+  const submitHandlerTwo = (e) => {
+    e.preventDefault();
+    if (!emailTwo || !passwordTwo) return;
+
+    console.log(emailTwo + " " + passwordTwo);
+  };
+
+  const [emailThree, setEmailThree] = useState("abc@gmail.com");
+  const [passwordThree, setPasswordThree] = useState("986523");
+
+  const submitHandlerThree = (e) => {
+    e.preventDefault();
+    if (!emailThree || !passwordThree) return;
+
+    console.log(emailThree + " " + passwordThree);
+  };
+
   return (
     <>
-      {/* <h1>First Post</h1>
-      <h2>
-        <Link href="/">Back to home</Link>
-      </h2> */}
       <div
         className={styles.slImgBg}
         style={{
@@ -23,6 +50,9 @@ export default function login() {
         <div>
           <h1>API Abuse Example</h1>
           <h3>Attack Example</h3>
+          <Link href="/" className="btn btn-primary mb-3">
+            Back to home
+          </Link>
         </div>
 
         <div className="container mb-5 ">
@@ -31,10 +61,14 @@ export default function login() {
             <hr />
             <div className="row">
               <div className="col-sm-5">
-                <form id="loginFormOne">
+                <form
+                  id="loginFormOne"
+                  method="POST"
+                  onSubmit={submitHandlerOne}
+                >
                   <div className="mb-3 row">
                     <label
-                      for="staticEmail"
+                      htmlFor="staticEmail"
                       className="col-sm-2 col-form-label"
                     >
                       Email
@@ -45,13 +79,14 @@ export default function login() {
                         className="form-control"
                         id="emailOne"
                         name="email"
-                        value="yash@gmail.com"
+                        defaultValue="yash@gmail.com"
+                        onChange={(e) => setEmailOne(e.target.value)}
                       />
                     </div>
                   </div>
                   <div className="mb-3 row">
                     <label
-                      for="inputPassword"
+                      htmlFor="inputPassword"
                       className="col-sm-2 col-form-label"
                     >
                       Password
@@ -62,7 +97,8 @@ export default function login() {
                         className="form-control"
                         id="passwordOne"
                         name="password"
-                        value="Yash1234$"
+                        defaultValue="Yash1234$"
+                        onChange={(e) => setPasswordOne(e.target.value)}
                       />
                     </div>
                   </div>
@@ -70,7 +106,7 @@ export default function login() {
                     <input
                       type="submit"
                       className="btn btn-primary mb-3"
-                      value="Submit"
+                      defaultValue="Submit"
                     />
                   </div>
                 </form>
@@ -83,120 +119,124 @@ export default function login() {
               </div>
             </div>
           </div>
-          <div className="container mt-5 border p-2 bg-secondary">
-            <h1 className="ul">SQL Injection</h1>
-            <hr />
-            <div className="row">
-              <div className="col-sm-5">
-                <form id="loginFormTwo">
-                  <div className="mb-3 row">
-                    <label
-                      for="staticEmail"
-                      className="col-sm-2 col-form-label"
-                    >
-                      Email
-                    </label>
-                    <div className="col-sm-10">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="emailTwo"
-                        name="email"
-                        value="yash@gmail.com"
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-3 row">
-                    <label
-                      for="inputPassword"
-                      className="col-sm-2 col-form-label"
-                    >
-                      Password
-                    </label>
-                    <div className="col-sm-10">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="passwordTwo"
-                        name="password"
-                        value="'or'1=1"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-auto">
+        </div>
+
+        <div className="container mt-5 border p-2 bg-secondary">
+          <h1 className="ul">SQL Injection</h1>
+          <hr />
+          <div className="row">
+            <div className="col-sm-5">
+              <form id="loginFormTwo" onSubmit={submitHandlerTwo}>
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="staticEmail"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Email
+                  </label>
+                  <div className="col-sm-10">
                     <input
-                      type="submit"
-                      className="btn btn-primary mb-3"
-                      value="Submit"
+                      type="text"
+                      className="form-control"
+                      id="emailTwo"
+                      name="email"
+                      defaultValue="yash@gmail.com"
+                      onChange={(e) => setEmailTwo(e.target.value)}
                     />
                   </div>
-                </form>
-              </div>
-              <div className="col-sm-7">
-                <h3>Output of API Call</h3>
-                <div className="border p-2">
-                  <pre id="messageTwo"></pre>
                 </div>
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="inputPassword"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Password
+                  </label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="passwordTwo"
+                      name="password"
+                      defaultValue="'or'1=1"
+                      onChange={(e) => setPasswordTwo(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-auto">
+                  <input
+                    type="submit"
+                    className="btn btn-primary mb-3"
+                    defaultValue="Submit"
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="col-sm-7">
+              <h3>Output of API Call</h3>
+              <div className="border p-2">
+                <pre id="messageTwo"></pre>
               </div>
             </div>
           </div>
-          <div className="container mt-5 border p-2 bg-secondary">
-            <h1 className="ul">Brute Force Attack</h1>
-            <hr />
-            <div className="row">
-              <div className="col-sm-5">
-                <form id="loginFormThree">
-                  <div className="mb-3 row">
-                    <label
-                      for="staticEmail"
-                      className="col-sm-2 col-form-label"
-                    >
-                      Email
-                    </label>
-                    <div className="col-sm-10">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="emailThree"
-                        name="email"
-                        value="abc@gmail.com"
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-3 row">
-                    <label
-                      for="inputPassword"
-                      className="col-sm-2 col-form-label"
-                    >
-                      Password
-                    </label>
-                    <div className="col-sm-10">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="passwordThree"
-                        name="password"
-                        aria-label="Disabled input example"
-                        disabled
-                        readonly
-                      />
-                    </div>
-                  </div>
-                  <div className="col-auto">
+        </div>
+        <div className="container mt-5 border p-2 bg-secondary">
+          <h1 className="ul">Brute Force Attack</h1>
+          <hr />
+          <div className="row">
+            <div className="col-sm-5">
+              <form id="loginFormThree" onSubmit={submitHandlerThree}>
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="staticEmail"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Email
+                  </label>
+                  <div className="col-sm-10">
                     <input
-                      type="submit"
-                      className="btn btn-primary mb-3"
-                      value="Submit"
+                      type="text"
+                      className="form-control"
+                      id="emailThree"
+                      name="email"
+                      defaultValue="abc@gmail.com"
+                      onChange={(e) => setEmailThree(e.target.value)}
                     />
                   </div>
-                  <p id="passwordCount"></p>
-                </form>
-              </div>
-              <div className="col-sm-7">
-                <h3>Output of API Call</h3>
-                <div className="border p-2">
-                  <pre id="messageThree"></pre>
                 </div>
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="inputPassword"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Password
+                  </label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="passwordThree"
+                      name="password"
+                      aria-label="Disabled input example"
+                      disabled
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="col-auto">
+                  <input
+                    type="submit"
+                    className="btn btn-primary mb-3"
+                    defaultValue="Submit"
+                  />
+                </div>
+                <p id="passwordCount"></p>
+              </form>
+            </div>
+            <div className="col-sm-7">
+              <h3>Output of API Call</h3>
+              <div className="border p-2">
+                <pre id="messageThree"></pre>
               </div>
             </div>
           </div>
