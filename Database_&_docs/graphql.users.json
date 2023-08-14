@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "64d501912292e843cd92842b"
+  },
+  "firstName": "yashNew",
+  "lastName": "patel",
+  "isAdmin": false,
+  "email": "yash@yash.com",
+  "password": "$2a$12$87GidHcwndoYjCDakBQYFeYh8nKxCfTtTs3VEjwoVSyTtCnnib9Bi",
+  "__v": 0
+}]
